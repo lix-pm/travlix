@@ -51,10 +51,17 @@ class Run {
 			return Promise.inSequence([for(haxe in haxe) {
 				cmd('switchx', ['install', haxe], 'switchx: Installing Haxe Version: $haxe')
 					.next(function(_):Promise<Noise> {
-						function runTargets():Promise<Noise>
-							return Promise.inSequence([for(target in target)
-								cmd('travix', [target], 'travix: Running target - $target', true)
-							]);
+						
+						function runTargets():Promise<Noise> {
+							for(target in target) Sys.command('travix', [target]);
+							return Noise;
+						}
+						
+						// TODO: this doesn't work?
+						// function runTargets():Promise<Noise>
+						// 	return Promise.inSequence([for(target in target)
+						// 		cmd('travix', [target], 'travix: Running target - $target', true)
+						// 	]);
 							
 						return if(lib != null && lib.length > 0)
 							Promise.inSequence([for(lib in lib) 
@@ -71,16 +78,18 @@ class Run {
 	function prepare() {
 		return hasCommand('yarn').next(function(has) {
 			var pm, globalInstall;
-			if(has) {
-				pm = 'yarn';
-				globalInstall = ['yarn', 'global', 'add'];
-			} else {
+			// if(has) {
+			// 	pm = 'yarn';
+			// 	globalInstall = ['yarn', 'global', 'add'];
+			// 	Sys.println("export PATH=$PATH:$HOME/.config/yarn/global/node_modules/.bin"); // this sucks
+			// } else {
 				pm = 'npm';
 				globalInstall = ['npm', 'install', '-g'];
-			}
+			// }
 			
 			return cmd(globalInstall[0], globalInstall.slice(1).concat(['--silent', 'haxeshim', 'switchx', 'lix.pm', 'haxe-travix']), '$pm: Downloading Node Libraries')
-				.next(function(_) return cmd('lix', ['download'], 'lix: Downloading Libraries'));
+				.next(function(_) return cmd('switchx', [], 'switchx: Initializing'))
+				.next(function(_) return cmd('lix', ['download'], 'lix: Downloading Libraries', true));
 		});
 	}
 	
