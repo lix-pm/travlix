@@ -1,0 +1,11 @@
+-cp src
+-main travlix.Main
+-js bin/travlix.js
+-dce full
+
+-lib hxnodejs
+-lib tink_cli
+-lib asys
+-lib travix
+
+--macro travix.Macro.shebang()

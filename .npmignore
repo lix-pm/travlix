@@ -1,0 +1,6 @@
+.vscode
+haxe_libraries
+src
+/*.*
+!package.json
+!README.json

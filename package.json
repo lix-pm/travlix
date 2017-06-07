@@ -1,0 +1,13 @@
+{
+  "name": "travlix",
+  "version": "0.1.0",
+  "bin": {
+    "travlix": "bin/travlix.js"
+  },
+  "scripts": {
+    "prepublishOnly": "haxe build.hxml"
+  },
+  "description": "Helper for running CI tests with lix.pm",
+  "author": "Kevin Leung <kevinresol@gmail.com>",
+  "license": "MIT"
+}
