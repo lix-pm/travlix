@@ -4,7 +4,7 @@
 
 ```
 yarn global add travlix
-travlix --haxe 3.2.1,3.4.2 --target js,node
+travlix run --haxe 3.2.1,3.4.2 --target js,node
 ```
 
 
