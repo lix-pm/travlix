@@ -1,20 +1,15 @@
-```
-lixtest --haxe 3.2.1,3.4.2 --target js,node --lib haxelib:tink_core#1.11.0,haxelib:tink_core#1.12.0
-```
+# CI runner for lix
+
+## Usage
 
 ```
-switchx use 3.2.1
-lix install haxelib:tink_core#1.11.0
-travix js
-travix node
-lix install haxelib:tink_core#1.12.0
-travix js
-travix node
-switchx use 3.4.2
-lix install haxelib:tink_core#1.11.0
-travix js
-travix node
-lix install haxelib:tink_core#1.12.0
-travix js
-travix node
+yarn global add travlix
+travlix --haxe 3.2.1,3.4.2 --target js,node
 ```
+
+
+Options:
+
+- `--haxe`, `-h`: (Required) Haxe versions to test, comma separated.
+- `--target`, `-t`: (Required) Targets to test, comma separated.
+- `--lib`, `-l`: (Optional) Lib versions to test, comma separated, in lix format.
