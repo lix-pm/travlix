@@ -53,7 +53,7 @@ class Run {
 					.next(function(_):Promise<Noise> {
 						
 						function runTargets():Promise<Noise> {
-							for(target in target) Sys.command('travix', [target]);
+							for(target in target) if(Sys.command('travix', [target]) != 0) return new Error(500, 'Failed');
 							return Noise;
 						}
 						
