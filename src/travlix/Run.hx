@@ -1,6 +1,7 @@
 package travlix;
 
 import tink.Cli;
+import tink.cli.Rest;
 import tink.stringly.CommaSeparatedArray;
 import tink.streams.Stream;
 import asys.io.Process;
@@ -33,7 +34,6 @@ class Run {
 	 */
 	public var lib:CommaSeparatedArray<String>;
 	
-	
 	/**
 	 * Show this help 
 	 */
@@ -46,14 +46,14 @@ class Run {
 	 *  Run test matrix
 	 */
 	@:defaultCommand
-	public function run() {
+	public function run(rest:Rest<String>) {
 		return prepare().next(function(_) {
 			return Promise.inSequence([for(haxe in haxe) {
 				cmd('switchx', ['install', haxe], 'switchx: Installing Haxe Version: $haxe')
 					.next(function(_):Promise<Noise> {
 						
 						function runTargets():Promise<Noise> {
-							for(target in target) if(Sys.command('travix', [target]) != 0) return new Error(500, 'Failed');
+							for(target in target) if(Sys.command('travix', [target].concat(rest)) != 0) return new Error(500, 'Failed');
 							return Noise;
 						}
 						
