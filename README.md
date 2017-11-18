@@ -15,3 +15,23 @@ Options:
 - `--haxe`, `-h`: (Required) Haxe versions to test, comma separated.
 - `--target`, `-t`: (Required) Targets to test, comma separated.
 - `--lib`, `-l`: (Optional) Lib versions to test, comma separated, in lix format.
+
+## Travis CI template
+
+```yaml
+sudo: required
+dist: trusty
+
+language: node_js
+node_js: 6
+
+os:
+  - linux
+  - osx
+  
+install:
+  - npm install -g travlix
+
+script:
+  - travlix run --haxe 3.4.4 --target node
+```
